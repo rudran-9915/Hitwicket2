@@ -3,84 +3,48 @@ import "../css/pieces.css";
 import { gridConstants } from "../helpers/imageHelpers";
 
 export default function Box(props) {
-  if (props.number % 2 === 0) {
-    return (
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          backgroundColor:
-            props.pos === props.prevGrabPos || props.pos === props.currentPos
-              ? "#F2F05D"
-              : "#F5F7D7",
-          justifyContent: "center",
-          alignItems: "center",
-          // border:row===0 && col===4 ?'1.5px solid red' : ""
-        }}
-      >
-        {props.image ? (
-          <div
-            style={{
-              backgroundImage: `url(${props.image})`,
-              backgroundSize: "cover",
-              height: gridConstants.gridSize / 8,
-              width: gridConstants.gridSize / 8,
-            }}
-            className="piece"
-          />
-        ) : (
-          props.moveTrack &&
-          props.moveTrack[props.pos] && (
-            <div
-              style={{
-                height: gridConstants.gridSize / 16,
-                width: gridConstants.gridSize / 16,
-                borderRadius: gridConstants.gridSize / 16,
-                backgroundColor: "rgba(112, 123, 124 ,0.7)",
-              }}
-            />
-          )
-        )}
-      </div>
-    );
-  } else
-    return (
-      <div
-        style={{
-          display: "flex",
-          flex: 1,
-          backgroundColor:
-            props.pos === props.prevGrabPos || props.pos === props.currentPos
-              ? "#DBC809"
-              : "",
+  const boxSize = gridConstants.gridSize / 5; // Adjusted for 5x5 grid
 
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        {props.image ? (
+  return (
+    <div
+      style={{
+        display: "flex",
+        flex: 1,
+        backgroundColor:
+          props.pos === props.prevGrabPos || props.pos === props.currentPos
+            ? props.number % 2 === 0
+              ? "#F2F05D"
+              : "#DBC809"
+            : props.number % 2 === 0
+            ? "#F5F7D7"
+            : "",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      {props.image ? (
+        <div
+          style={{
+            backgroundImage: `url(${props.image})`,
+            backgroundSize: "cover",
+            height: boxSize, // Updated box size
+            width: boxSize, // Updated box size
+          }}
+          className="piece"
+        />
+      ) : (
+        props.moveTrack &&
+        props.moveTrack[props.pos] && (
           <div
             style={{
-              backgroundImage: `url(${props.image})`,
-              backgroundSize: "cover",
-              height: gridConstants.gridSize / 8,
-              width: gridConstants.gridSize / 8,
+              height: boxSize, // Updated move indicator size
+              width: boxSize, // Updated move indicator size
+              borderRadius: boxSize, // Updated border-radius for circular shape
+              backgroundColor: "rgba(112, 123, 124 ,0.7)",
             }}
-            className="piece"
           />
-        ) : (
-          props.moveTrack &&
-          props.moveTrack[props.pos] && (
-            <div
-              style={{
-                height: gridConstants.gridSize / 16,
-                width: gridConstants.gridSize / 16,
-                borderRadius: gridConstants.gridSize / 16,
-                backgroundColor: "rgba(112, 123, 124 ,0.7)",
-              }}
-            />
-          )
-        )}
-      </div>
-    );
+        )
+      )}
+    </div>
+  );
 }

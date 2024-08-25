@@ -31,11 +31,11 @@ export const grabPiece = (
 
       if (element.classList.contains("piece")) {
         const grabX = Math.floor(
-          (e.clientX - chessboard.offsetLeft) / (gridConstants.gridSize / 8)
+          (e.clientX - chessboard.offsetLeft) / (gridConstants.gridSize / 5)
         );
         const grabY = Math.abs(
           Math.floor(
-            (e.clientY - chessboard.offsetTop) / (gridConstants.gridSize / 8)
+            (e.clientY - chessboard.offsetTop) / (gridConstants.gridSize / 5)
           )
         );
 
@@ -66,8 +66,8 @@ export const grabPiece = (
           )
         );
 
-        const x = e.clientX - gridConstants.gridSize / 8 / 2;
-        const y = e.clientY - gridConstants.gridSize / 8 / 2;
+        const x = e.clientX - gridConstants.gridSize / 5 / 2;
+        const y = e.clientY - gridConstants.gridSize / 5 / 2;
         element.style.position = "absolute";
         element.style.left = `${x}px`;
         element.style.top = `${y}px`;
@@ -86,8 +86,8 @@ export const movePiece = (e, chessboardRef, activePiece, setActivePiece) => {
     const minX = chessboard.offsetLeft;
     const minY = chessboard.offsetTop;
 
-    const maxX = chessboard.offsetLeft + chessboard.clientWidth - 56;
-    const maxY = chessboard.offsetTop + chessboard.clientHeight - 56;
+    const maxX = chessboard.offsetLeft + chessboard.clientWidth - 20;
+    const maxY = chessboard.offsetTop + chessboard.clientHeight - 20;
 
     // console.log(chessboard.offsetLeft, chessboard.clientWidth);
 
@@ -171,11 +171,11 @@ export const dropPiece = (
 
     if (activePiece && chessboard) {
       const x = Math.floor(
-        (e.clientX - chessboard.offsetLeft) / (gridConstants.gridSize / 8)
+        (e.clientX - chessboard.offsetLeft) / (gridConstants.gridSize / 5)
       );
       const y = Math.abs(
         Math.floor(
-          (e.clientY - chessboard.offsetTop) / (gridConstants.gridSize / 8)
+          (e.clientY - chessboard.offsetTop) / (gridConstants.gridSize / 5)
         )
       );
 
@@ -183,15 +183,15 @@ export const dropPiece = (
 
       // console.log(pos);
 
-      let posOp = (7 - y).toString() + ":" + (7 - x).toString();
+      let posOp = (4 - y).toString() + ":" + (4 - x).toString();
 
       let grabpos =
         grabPosition[0].toString() + ":" + grabPosition[1].toString();
 
       let grabposOp =
-        (7 - grabPosition[0]).toString() +
+        (4 - grabPosition[0]).toString() +
         ":" +
-        (7 - grabPosition[1]).toString();
+        (4 - grabPosition[1]).toString();
 
       // console.log(grabpos)
 
@@ -290,8 +290,8 @@ export const dropPiece = (
 
         if (
           callingOpponentForCheckMate(
-            7 - Number(kingPosOp.split(":")[0]),
-            7 - Number(kingPosOp.split(":")[1]),
+            4 - Number(kingPosOp.split(":")[0]),
+            4 - Number(kingPosOp.split(":")[1]),
             y,
             x,
             pieces[pos].pieceName,
@@ -304,8 +304,8 @@ export const dropPiece = (
           setOpponentCalledForCheck(true);
 
           let checkMateCount = isValidMoveForCheckMate(
-            7 - Number(kingPosOp.split(":")[0]),
-            7 - Number(kingPosOp.split(":")[1]),
+            4 - Number(kingPosOp.split(":")[0]),
+            4 - Number(kingPosOp.split(":")[1]),
             pieces
           );
 
@@ -314,8 +314,8 @@ export const dropPiece = (
           if (checkMateCount > 1) {
             if (
               !kingAbleToMoveAfterCheckMate(
-                7 - Number(kingPosOp.split(":")[0]),
-                7 - Number(kingPosOp.split(":")[1]),
+                4 - Number(kingPosOp.split(":")[0]),
+                4 - Number(kingPosOp.split(":")[1]),
                 pieces
               )
             ) {
@@ -330,14 +330,14 @@ export const dropPiece = (
           } else if (
             !checkMateStopFromOTherPiece(
               pieces,
-              7 - Number(kingPosOp.split(":")[0]),
-              7 - Number(kingPosOp.split(":")[1]),
+              4 - Number(kingPosOp.split(":")[0]),
+              4 - Number(kingPosOp.split(":")[1]),
               y,
               x
             ) &&
             !kingAbleToMoveAfterCheckMate(
-              7 - Number(kingPosOp.split(":")[0]),
-              7 - Number(kingPosOp.split(":")[1]),
+              4 - Number(kingPosOp.split(":")[0]),
+              4 - Number(kingPosOp.split(":")[1]),
               pieces
             )
           ) {
@@ -495,8 +495,8 @@ export const dropPiece = (
 
         if (
           callingOpponentForCheckMate(
-            7 - Number(kingPos.split(":")[0]),
-            7 - Number(kingPos.split(":")[1]),
+            4 - Number(kingPos.split(":")[0]),
+            4 - Number(kingPos.split(":")[1]),
             y,
             x,
             piecesOpponent[pos].pieceName,
@@ -509,7 +509,7 @@ export const dropPiece = (
           setOpponentCalledForCheck(true);
 
           let checkMateCount = isValidMoveForCheckMate(
-            7 - Number(kingPos.split(":")[0]),
+            4 - Number(kingPos.split(":")[0]),
             Number(kingPos.split(":")[1]),
             piecesOpponent
           );
@@ -519,8 +519,8 @@ export const dropPiece = (
           if (checkMateCount > 1) {
             if (
               !kingAbleToMoveAfterCheckMate(
-                7 - Number(kingPos.split(":")[0]),
-                7 - Number(kingPos.split(":")[1]),
+                4 - Number(kingPos.split(":")[0]),
+                4 - Number(kingPos.split(":")[1]),
                 piecesOpponent
               )
             ) {
@@ -535,14 +535,14 @@ export const dropPiece = (
           } else if (
             !checkMateStopFromOTherPiece(
               piecesOpponent,
-              7 - Number(kingPos.split(":")[0]),
-              7 - Number(kingPos.split(":")[1]),
+              4 - Number(kingPos.split(":")[0]),
+              4 - Number(kingPos.split(":")[1]),
               y,
               x
             ) &&
             !kingAbleToMoveAfterCheckMate(
-              7 - Number(kingPos.split(":")[0]),
-              7 - Number(kingPos.split(":")[1]),
+              4 - Number(kingPos.split(":")[0]),
+              4 - Number(kingPos.split(":")[1]),
               piecesOpponent
             )
           ) {
@@ -682,7 +682,7 @@ export const movePosTracker = (x, y, pieces) => {
   }
 
   // down
-  for (let i = x + 1; i < 8; i++) {
+  for (let i = x + 1; i < 5; i++) {
     let pos = i.toString() + ":" + y.toString();
 
     if (pieces[pos]) {
@@ -702,7 +702,7 @@ export const movePosTracker = (x, y, pieces) => {
   }
 
   // right
-  for (let i = y + 1; i < 8; i++) {
+  for (let i = y + 1; i < 5; i++) {
     let pos = x.toString() + ":" + i.toString();
 
     if (pieces[pos]) {
@@ -722,7 +722,7 @@ export const movePosTracker = (x, y, pieces) => {
   }
 
   // left down
-  for (let i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
+  for (let i = x + 1, j = y - 1; i < 5 && j >= 0; i++, j--) {
     let pos = i.toString() + ":" + j.toString();
 
     if (pieces[pos]) {
@@ -732,7 +732,7 @@ export const movePosTracker = (x, y, pieces) => {
   }
 
   // right up
-  for (let i = x - 1, j = y + 1; i >= 0 && j < 8; i--, j++) {
+  for (let i = x - 1, j = y + 1; i >= 0 && j < 5; i--, j++) {
     let pos = i.toString() + ":" + j.toString();
 
     if (pieces[pos]) {
@@ -742,7 +742,7 @@ export const movePosTracker = (x, y, pieces) => {
   }
 
   // right down
-  for (let i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
+  for (let i = x + 1, j = y + 1; i < 5 && j < 5; i++, j++) {
     let pos = i.toString() + ":" + j.toString();
 
     if (pieces[pos]) {

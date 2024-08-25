@@ -598,8 +598,8 @@ const chessBoardDiv = {
   borderRadius: 2,
   display: "grid",
   flexWrap: "wrap",
-  gridTemplateColumns: `repeat(8,${gridConstants.gridSize / 8}px)`,
-  gridTemplateRows: `repeat(8,${gridConstants.gridSize / 8}px)`,
+  gridTemplateColumns: `repeat(5,${gridConstants.gridSize / 5}px)`,
+  gridTemplateRows: `repeat(5,${gridConstants.gridSize / 5}px)`,
 };
 
 const topAndBottomDiv = {

@@ -35,59 +35,81 @@ class PieceTracker {
   }
 
   isPawn() {
-    if (this.x === 6) {
-      this.moveTrack[(this.x - 1).toString() + ":" + this.y.toString()] = true;
-      this.moveTrack[(this.x - 2).toString() + ":" + this.y.toString()] = true;
-    } else {
-      this.moveTrack[(this.x - 1).toString() + ":" + this.y.toString()] = true;
+    if (this.x - 1 >= 0) {
+      let pos = (this.x - 1).toString() + ":" + this.y.toString();
+      if (!this.pieces[pos]) {
+        this.moveTrack[pos] = true;
+      }
+    }
+
+    // Move down
+    if (this.x + 1 < 5) {
+      let pos = (this.x + 1).toString() + ":" + this.y.toString();
+      if (!this.pieces[pos]) {
+        this.moveTrack[pos] = true;
+      }
+    }
+
+    // Move left
+    if (this.y - 1 >= 0) {
+      let pos = this.x.toString() + ":" + (this.y - 1).toString();
+      if (!this.pieces[pos]) {
+        this.moveTrack[pos] = true;
+      }
+    }
+
+    // Move right
+    if (this.y + 1 < 5) {
+      let pos = this.x.toString() + ":" + (this.y + 1).toString();
+      if (!this.pieces[pos]) {
+        this.moveTrack[pos] = true;
+      }
     }
 
     return this.moveTrack;
   }
 
   isRook() {
-    // up
-    for (let i = this.x - 1; i >= 0; i--) {
-      let pos = i.toString() + ":" + this.y.toString();
+    this.moveTrack = {}; // Initialize the move track object
 
-      if (this.pieces[pos]) {
-        break;
-      }
-      this.moveTrack[pos] = true;
+    // up
+    for (let i = 1; i <= 2; i++) {
+        let posX = this.x - i;
+        if (posX < 0) break;
+        let pos = posX.toString() + ":" + this.y.toString();
+        if (this.pieces[pos]) break;
+        this.moveTrack[pos] = true;
     }
 
     // down
-    for (let i = this.x + 1; i < 8; i++) {
-      let pos = i.toString() + ":" + this.y.toString();
-
-      if (this.pieces[pos]) {
-        break;
-      }
-      this.moveTrack[pos] = true;
+    for (let i = 1; i <= 2; i++) {
+        let posX = this.x + i;
+        if (posX >= 8) break;
+        let pos = posX.toString() + ":" + this.y.toString();
+        if (this.pieces[pos]) break;
+        this.moveTrack[pos] = true;
     }
 
     // left
-    for (let i = this.y - 1; i >= 0; i--) {
-      let pos = this.x.toString() + ":" + i.toString();
-
-      if (this.pieces[pos]) {
-        break;
-      }
-      this.moveTrack[pos] = true;
+    for (let i = 1; i <= 2; i++) {
+        let posY = this.y - i;
+        if (posY < 0) break;
+        let pos = this.x.toString() + ":" + posY.toString();
+        if (this.pieces[pos]) break;
+        this.moveTrack[pos] = true;
     }
 
     // right
-    for (let i = this.y + 1; i < 8; i++) {
-      let pos = this.x.toString() + ":" + i.toString();
-
-      if (this.pieces[pos]) {
-        break;
-      }
-      this.moveTrack[pos] = true;
+    for (let i = 1; i <= 2; i++) {
+        let posY = this.y + i;
+        if (posY >= 8) break;
+        let pos = this.x.toString() + ":" + posY.toString();
+        if (this.pieces[pos]) break;
+        this.moveTrack[pos] = true;
     }
 
     return this.moveTrack;
-  }
+}
 
   isBishop() {
     // left up

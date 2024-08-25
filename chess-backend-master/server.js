@@ -10,15 +10,16 @@ import { createOrUpdateRoom } from "./src/controllers/roomController.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors());  // CORS middleware setup for Express
+
 app.use(userRouter);
 app.use(roomRouter);
 
-const server = http.createServer(app);
+const server = http.createServer(app);  // Create an HTTP server with Express
 
 const io = new Server(server, {
   cors: {
-    origin: "https://chess-frontend.netlify.app",
+    origin: ["http://localhost:3000"],  // Frontend origin
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -27,6 +28,8 @@ const io = new Server(server, {
 var waitingUsers = [];
 
 io.on("connection", (socket) => {
+  console.log("New client connected", socket.id);
+
   socket.on("join_room", (data) => {
     waitingUsers.push({ username: data.username, socket: socket });
     waitingUsers = mapUsersToRoom(waitingUsers);
@@ -34,7 +37,6 @@ io.on("connection", (socket) => {
 
   socket.on("send_data", async (data) => {
     await createOrUpdateRoom(data);
-
     socket.to(data.roomid).emit("recieve_room_data", data);
   });
 
@@ -59,8 +61,10 @@ io.on("connection", (socket) => {
   });
 });
 
-app.get("/", async (req, res) => {
-  res.send("api is running");
+app.get("/", (req, res) => {
+  res.send("API is running");
 });
 
-server.listen(process.env.PORT || 3001);
+server.listen(3001, () => {
+  console.log("Server is running on port 3001");
+});

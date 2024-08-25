@@ -38,36 +38,32 @@ class ValidMove {
   }
 
   isPawn() {
-    if (Math.abs(this.prevY - this.y) > 1) return false;
+    const pos = `${this.x}:${this.y}`;
+    const prevPos = `${this.prevX}:${this.prevY}`;
 
-    // checking if pawn is in starting position pawn can jump 2 steps or else only 1 step
+    // Allow movement in all directions (forward, backward, left, right)
+    const isMovingVertically = Math.abs(this.prevX - this.x) <= 1;
+    const isMovingHorizontally = Math.abs(this.prevY - this.y) <= 1;
 
-    if (
-      (this.prevX === 6 && this.prevX - this.x === 2) ||
-      this.prevX - this.x === 1
-    ) {
-      let prevPos = this.prevX.toString() + ":" + this.prevY.toString();
+    if (isMovingVertically && isMovingHorizontally) {
+        // Check if the move is a valid attack move (diagonal)
+        if (
+            this.pieces[pos] &&
+            this.pieces[pos].color !== this.pieces[prevPos].color &&
+            Math.abs(this.prevX - this.x) === 1 &&
+            Math.abs(this.prevY - this.y) === 1
+        ) {
+            return true;
+        }
 
-      let pos = this.x.toString() + ":" + this.y.toString();
-
-      //below condition helps to attack valid pawn attack
-
-      if (
-        this.pieces[pos] &&
-        this.pieces[pos].color !== this.pieces[prevPos].color &&
-        Math.abs(this.prevX - this.x) == 1 &&
-        Math.abs(this.prevY - this.y) == 1
-      ) {
-        return true;
-      }
-
-      //below condition helps to valid move for pawn
-
-      if (!this.pieces[pos] && Math.abs(this.prevY - this.y) === 0) return true;
+        // Check if the move is a valid non-attacking move (straight)
+        if (!this.pieces[pos] && (this.prevX !== this.x || this.prevY !== this.y)) {
+            return true;
+        }
     }
 
     return false;
-  }
+}
 
   isRook() {
     if (
