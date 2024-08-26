@@ -77,7 +77,7 @@ export default function Home() {
         </div>
 
         <img
-          src={"https://www.a23.com/index_assets/images/a23-games-logo.svg"}
+          src={""}
           alt=""
           style={{ height: 40, width: 40, margin: 5 }}
         />
