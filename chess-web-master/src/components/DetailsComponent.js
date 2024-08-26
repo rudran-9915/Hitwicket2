@@ -31,7 +31,7 @@ export default function DetailsComponent({
         className="prevpos"
         style={{
           width: gridConstants.gridSize,
-          height: gridConstants.gridSize / 9,
+          height: gridConstants.gridSize / 5,
           backgroundColor: "rgb(46, 46, 46)",
           marginLeft: 10,
           marginBottom: 2,
@@ -84,7 +84,7 @@ export default function DetailsComponent({
       <div
         style={{
           width: gridConstants.gridSize,
-          height: gridConstants.gridSize / 9,
+          height: gridConstants.gridSize / 6,
           backgroundColor: "rgb(46, 46, 46)",
           marginLeft: 10,
           marginTop: 2,

@@ -41,29 +41,21 @@ class ValidMove {
     const pos = `${this.x}:${this.y}`;
     const prevPos = `${this.prevX}:${this.prevY}`;
 
-    // Allow movement in all directions (forward, backward, left, right)
-    const isMovingVertically = Math.abs(this.prevX - this.x) <= 1;
-    const isMovingHorizontally = Math.abs(this.prevY - this.y) <= 1;
+    // Allow movement only in vertical or horizontal directions
+    const isMovingVertically = this.prevX === this.x && Math.abs(this.prevY - this.y) === 1;
+    const isMovingHorizontally = this.prevY === this.y && Math.abs(this.prevX - this.x) === 1;
 
-    if (isMovingVertically && isMovingHorizontally) {
-        // Check if the move is a valid attack move (diagonal)
-        if (
-            this.pieces[pos] &&
-            this.pieces[pos].color !== this.pieces[prevPos].color &&
-            Math.abs(this.prevX - this.x) === 1 &&
-            Math.abs(this.prevY - this.y) === 1
-        ) {
-            return true;
-        }
-
+    // Ensure no diagonal movement
+    if (isMovingVertically || isMovingHorizontally) {
         // Check if the move is a valid non-attacking move (straight)
-        if (!this.pieces[pos] && (this.prevX !== this.x || this.prevY !== this.y)) {
+        if (!this.pieces[pos]) {
             return true;
         }
     }
 
     return false;
 }
+
 
 isRook() {
   if (
@@ -78,7 +70,12 @@ isRook() {
   if (this.prevX - this.x > 0 && this.prevY === this.y) {
     for (let i = this.prevX - 1; i >= this.x; i--) {
       let pos = i.toString() + ":" + this.y.toString();
-      if (this.pieces[pos]) return false;
+      if (this.pieces[pos]) {
+        if (i === this.x && this.pieces[pos].color !== this.pieces[`${this.prevX}:${this.prevY}`].color) {
+          return true; // Capturing an opponent's piece
+        }
+        return false; // Obstacle in the way
+      }
     }
     return true;
   }
@@ -87,7 +84,12 @@ isRook() {
   if (this.x - this.prevX > 0 && this.prevY === this.y) {
     for (let i = this.prevX + 1; i <= this.x; i++) {
       let pos = i.toString() + ":" + this.y.toString();
-      if (this.pieces[pos]) return false;
+      if (this.pieces[pos]) {
+        if (i === this.x && this.pieces[pos].color !== this.pieces[`${this.prevX}:${this.prevY}`].color) {
+          return true; // Capturing an opponent's piece
+        }
+        return false; // Obstacle in the way
+      }
     }
     return true;
   }
@@ -96,7 +98,12 @@ isRook() {
   if (this.prevY - this.y > 0 && this.prevX === this.x) {
     for (let i = this.prevY - 1; i >= this.y; i--) {
       let pos = this.x.toString() + ":" + i.toString();
-      if (this.pieces[pos]) return false;
+      if (this.pieces[pos]) {
+        if (i === this.y && this.pieces[pos].color !== this.pieces[`${this.prevX}:${this.prevY}`].color) {
+          return true; // Capturing an opponent's piece
+        }
+        return false; // Obstacle in the way
+      }
     }
     return true;
   }
@@ -105,7 +112,12 @@ isRook() {
   if (this.y - this.prevY > 0 && this.prevX === this.x) {
     for (let i = this.prevY + 1; i <= this.y; i++) {
       let pos = this.x.toString() + ":" + i.toString();
-      if (this.pieces[pos]) return false;
+      if (this.pieces[pos]) {
+        if (i === this.y && this.pieces[pos].color !== this.pieces[`${this.prevX}:${this.prevY}`].color) {
+          return true; // Capturing an opponent's piece
+        }
+        return false; // Obstacle in the way
+      }
     }
     return true;
   }
@@ -114,74 +126,47 @@ isRook() {
 }
 
 
-  isBishop() {
-    if (Math.abs(this.prevX - this.x) !== Math.abs(this.prevY - this.y)) {
-      return false;
-    }
 
-    let rightUp = false,
-      rightDown = false,
-      leftUp = false,
-      leftDown = false;
-
-    if (this.prevX - this.x > 0 && this.prevY - this.y > 0) leftUp = true;
-
-    if (this.prevX - this.x > 0 && this.prevY - this.y < 0) rightUp = true;
-
-    if (this.prevX - this.x < 0 && this.prevY - this.y > 0) leftDown = true;
-
-    if (this.prevX - this.x < 0 && this.prevY - this.y < 0) rightDown = true;
-
-    if (leftUp) {
-      for (
-        let i = this.prevX - 1, j = this.prevY - 1;
-        i > this.x && j > this.y;
-        i--, j--
-      ) {
-        let pos = i.toString() + ":" + j.toString();
-
-        if (this.pieces[pos]) return false;
-      }
-    }
-
-    if (rightUp) {
-      for (
-        let i = this.prevX - 1, j = this.prevY + 1;
-        i > this.x && j < this.y;
-        i--, j++
-      ) {
-        let pos = i.toString() + ":" + j.toString();
-
-        if (this.pieces[pos]) return false;
-      }
-    }
-
-    if (leftDown) {
-      for (
-        let i = this.prevX + 1, j = this.prevY - 1;
-        i < this.x && j > this.y;
-        i++, j--
-      ) {
-        let pos = i.toString() + ":" + j.toString();
-
-        if (this.pieces[pos]) return false;
-      }
-    }
-
-    if (rightDown) {
-      for (
-        let i = this.prevX + 1, j = this.prevY + 1;
-        i < this.x && j < this.y;
-        i++, j++
-      ) {
-        let pos = i.toString() + ":" + j.toString();
-
-        if (this.pieces[pos]) return false;
-      }
-    }
-
-    return true;
+isBishop() {
+  // Check if the bishop is moving exactly two blocks diagonally
+  if (Math.abs(this.prevX - this.x) !== 2 || Math.abs(this.prevY - this.y) !== 2) {
+    return false;
   }
+
+  // Determine the direction of movement
+  let rightUp = false,
+    rightDown = false,
+    leftUp = false,
+    leftDown = false;
+
+  if (this.prevX - this.x > 0 && this.prevY - this.y > 0) leftUp = true;
+  if (this.prevX - this.x > 0 && this.prevY - this.y < 0) rightUp = true;
+  if (this.prevX - this.x < 0 && this.prevY - this.y > 0) leftDown = true;
+  if (this.prevX - this.x < 0 && this.prevY - this.y < 0) rightDown = true;
+
+  // Check if the path is clear (since it's always 2 blocks, we just need to check the block in between)
+  if (leftUp) {
+    let pos = (this.prevX - 1).toString() + ":" + (this.prevY - 1).toString();
+    if (this.pieces[pos]) return false;
+  }
+
+  if (rightUp) {
+    let pos = (this.prevX - 1).toString() + ":" + (this.prevY + 1).toString();
+    if (this.pieces[pos]) return false;
+  }
+
+  if (leftDown) {
+    let pos = (this.prevX + 1).toString() + ":" + (this.prevY - 1).toString();
+    if (this.pieces[pos]) return false;
+  }
+
+  if (rightDown) {
+    let pos = (this.prevX + 1).toString() + ":" + (this.prevY + 1).toString();
+    if (this.pieces[pos]) return false;
+  }
+
+  return true;
+}
 
   isKnight() {
     if (

@@ -66,8 +66,8 @@ export const grabPiece = (
           )
         );
 
-        const x = e.clientX - gridConstants.gridSize / 5 / 2;
-        const y = e.clientY - gridConstants.gridSize / 5 / 2;
+        const x = e.clientX - gridConstants.gridSize / 6 / 2;
+        const y = e.clientY - gridConstants.gridSize / 6 / 2;
         element.style.position = "absolute";
         element.style.left = `${x}px`;
         element.style.top = `${y}px`;
@@ -193,7 +193,7 @@ export const dropPiece = (
         ":" +
         (4 - grabPosition[1]).toString();
 
-      // console.log(grabpos)
+       //console.log(grabpos)
 
       if (
         !pieceValidMethodMap(

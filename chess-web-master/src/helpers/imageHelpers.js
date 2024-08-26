@@ -1,39 +1,39 @@
 export const initialPieces = {
-  "0:0": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "0:1": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "0:2": { image: require("../assets/wr.png"), color: "w", pieceName: "r" },
-  "0:3": { image: require("../assets/wb.png"), color: "w", pieceName: "b" },
-  "0:4": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
+  "0:0": { image: require("../assets/A-P1.png"), color: "w", pieceName: "p" },
+  "0:1": { image: require("../assets/A-P2.png"), color: "w", pieceName: "p" },
+  "0:2": { image: require("../assets/A-H1.png"), color: "w", pieceName: "r" },
+  "0:3": { image: require("../assets/A-H2.png"), color: "w", pieceName: "b" },
+  "0:4": { image: require("../assets/A-P3.png"), color: "w", pieceName: "p" },
 
 
-  "4:0": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "4:1": { image: require("../assets/bb.png"), color: "b", pieceName: "b" },
-  "4:2": { image: require("../assets/br.png"), color: "b", pieceName: "r" },
-  "4:3": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "4:4": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
+  "4:0": { image: require("../assets/B-P3.png"), color: "b", pieceName: "p" },
+  "4:1": { image: require("../assets/B-H2.png"), color: "b", pieceName: "b" },
+  "4:2": { image: require("../assets/B-H1.png"), color: "b", pieceName: "r" },
+  "4:3": { image: require("../assets/B-P2.png"), color: "b", pieceName: "p" },
+  "4:4": { image: require("../assets/B-P1.png"), color: "b", pieceName: "p" },
   
 
   
 };
 
 export const initialPiecesOpponent = {
-  "0:0": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "0:1": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "0:2": { image: require("../assets/br.png"), color: "b", pieceName: "r" },
-  "0:3": { image: require("../assets/bb.png"), color: "b", pieceName: "b" },
-  "0:4": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
+  "0:0": { image: require("../assets/B-P1.png"), color: "b", pieceName: "p" },
+  "0:1": { image: require("../assets/B-P2.png"), color: "b", pieceName: "p" },
+  "0:2": { image: require("../assets/B-H1.png"), color: "b", pieceName: "r" },
+  "0:3": { image: require("../assets/B-H2.png"), color: "b", pieceName: "b" },
+  "0:4": { image: require("../assets/B-P3.png"), color: "b", pieceName: "p" },
  
 
-  "4:0": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "4:1": { image: require("../assets/wb.png"), color: "w", pieceName: "b" },
-  "4:2": { image: require("../assets/wr.png"), color: "w", pieceName: "r" },
-  "4:3": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "4:4": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
+  "4:0": { image: require("../assets/A-P3.png"), color: "w", pieceName: "p" },
+  "4:1": { image: require("../assets/A-H2.png"), color: "w", pieceName: "b" },
+  "4:2": { image: require("../assets/A-H1.png"), color: "w", pieceName: "r" },
+  "4:3": { image: require("../assets/A-P2.png"), color: "w", pieceName: "p" },
+  "4:4": { image: require("../assets/A-P1.png"), color: "w", pieceName: "p" },
   
 };
 
 export const gridConstants = {
-  gridSize: 300,
+  gridSize: 350,
 };
 
 export const h = [1, 2, 3, 4, 5];
@@ -60,11 +60,6 @@ export const tempInitialPieces = {
   "0:3": { image: require("../assets/wk.png"), color: "w", pieceName: "k" },
   "0:4": { image: require("../assets/wq.png"), color: "w", pieceName: "q" },
  
-  "1:0": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "1:1": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "1:2": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "1:3": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "1:4": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
  
   "4:0": { image: require("../assets/br.png"), color: "b", pieceName: "r" },
   "4:1": { image: require("../assets/bn.png"), color: "b", pieceName: "n" },
@@ -72,12 +67,6 @@ export const tempInitialPieces = {
   "4:3": { image: require("../assets/bk.png"), color: "b", pieceName: "k" },
   "4:4": { image: require("../assets/bq.png"), color: "b", pieceName: "q" },
 
-
-  "3:0": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "3:1": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "3:2": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "3:3": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "3:4": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
   
 };
 
@@ -89,11 +78,6 @@ export const tempInitialPiecesOpponent = {
   "0:4": { image: require("../assets/bk.png"), color: "b", pieceName: "k" },
  
 
-  "1:0": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "1:1": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "1:2": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "1:3": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
-  "1:4": { image: require("../assets/bp.png"), color: "b", pieceName: "p" },
   
   "4:0": { image: require("../assets/wr.png"), color: "w", pieceName: "r" },
   "4:1": { image: require("../assets/wn.png"), color: "w", pieceName: "n" },
@@ -101,10 +85,5 @@ export const tempInitialPiecesOpponent = {
   "4:3": { image: require("../assets/wq.png"), color: "w", pieceName: "q" },
   "4:4": { image: require("../assets/wk.png"), color: "w", pieceName: "k" },
   
-  "3:0": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "3:1": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "3:2": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "3:3": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
-  "3:4": { image: require("../assets/wp.png"), color: "w", pieceName: "p" },
   
 };

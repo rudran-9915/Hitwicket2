@@ -33,7 +33,7 @@ import PawnReachedOtherSide from "../components/PawnReachedOtherSide";
 import CheckMatePopUp from "../components/CheckMatePopUp";
 import DetailsComponent from "../components/DetailsComponent";
 import axios from "axios";
-import { ArrowBack, ChevronLeft } from "@mui/icons-material";
+import { ArrowBack, BorderColor, ChevronLeft } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
 export default function ChessBoard() {
@@ -120,8 +120,10 @@ export default function ChessBoard() {
           prevGrabPos={prevMovePos?.grabpos}
           currentPos={prevMovePos?.pos}
           moveTrack={moveTrack}
+          style={{ backgroundColor: "grey" }} // Alternate colors for chessboard effect
         />
       );
+      
     }
   }
 
@@ -592,18 +594,21 @@ const rootDiv = {
   flexWrap: "wrap",
 };
 const chessBoardDiv = {
-  height: gridConstants.gridSize,
-  width: gridConstants.gridSize,
-  backgroundColor: "orange",
-  borderRadius: 2,
+  height: gridConstants.gridSize+10,
+  width: gridConstants.gridSize+10,
+  backgroundColor: "darkgrey", // Background color for the chessboard grid
+  border: "2px solid black",
   display: "grid",
   flexWrap: "wrap",
   gridTemplateColumns: `repeat(5,${gridConstants.gridSize / 5}px)`,
   gridTemplateRows: `repeat(5,${gridConstants.gridSize / 5}px)`,
+  gap: "2px", // Space between grid items
+  padding: "2px", // Padding inside the grid to separate from the edges
 };
 
+
 const topAndBottomDiv = {
-  width: gridConstants.gridSize - 5,
+  width: gridConstants.gridSize+20,
   display: "flex",
   justifyContent: "space-between",
   margin: 5,

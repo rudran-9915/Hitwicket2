@@ -40,7 +40,7 @@ export default function Box(props) {
               height: boxSize, // Updated move indicator size
               width: boxSize, // Updated move indicator size
               borderRadius: boxSize, // Updated border-radius for circular shape
-              backgroundColor: "rgba(112, 123, 124 ,0.7)",
+              backgroundColor: "grey",
             }}
           />
         )

@@ -111,49 +111,53 @@ class PieceTracker {
     return this.moveTrack;
 }
 
-  isBishop() {
-    // left up
-    for (let i = this.x - 1, j = this.y - 1; i >= 0 && j >= 0; i--, j--) {
-      let pos = i.toString() + ":" + j.toString();
+isBishop() {
+  // Reset moveTrack
+  this.moveTrack = {};
 
-      if (this.pieces[pos]) {
-        break;
-      }
-      this.moveTrack[pos] = true;
+  // left up
+  for (let i = this.x - 1, j = this.y - 1, steps = 1; i >= 0 && j >= 0 && steps <= 2; i--, j--, steps++) {
+    let pos = i.toString() + ":" + j.toString();
+
+    if (this.pieces[pos]) {
+      break;
     }
-
-    // left down
-    for (let i = this.x + 1, j = this.y - 1; i < 8 && j >= 0; i++, j--) {
-      let pos = i.toString() + ":" + j.toString();
-
-      if (this.pieces[pos]) {
-        break;
-      }
-      this.moveTrack[pos] = true;
-    }
-
-    // right up
-    for (let i = this.x - 1, j = this.y + 1; i >= 0 && j < 8; i--, j++) {
-      let pos = i.toString() + ":" + j.toString();
-
-      if (this.pieces[pos]) {
-        break;
-      }
-      this.moveTrack[pos] = true;
-    }
-
-    // right down
-    for (let i = this.x + 1, j = this.y + 1; i < 8 && j < 8; i++, j++) {
-      let pos = i.toString() + ":" + j.toString();
-
-      if (this.pieces[pos]) {
-        break;
-      }
-      this.moveTrack[pos] = true;
-    }
-
-    return this.moveTrack;
+    this.moveTrack[pos] = true;
   }
+
+  // left down
+  for (let i = this.x + 1, j = this.y - 1, steps = 1; i < 8 && j >= 0 && steps <= 2; i++, j--, steps++) {
+    let pos = i.toString() + ":" + j.toString();
+
+    if (this.pieces[pos]) {
+      break;
+    }
+    this.moveTrack[pos] = true;
+  }
+
+  // right up
+  for (let i = this.x - 1, j = this.y + 1, steps = 1; i >= 0 && j < 8 && steps <= 2; i--, j++, steps++) {
+    let pos = i.toString() + ":" + j.toString();
+
+    if (this.pieces[pos]) {
+      break;
+    }
+    this.moveTrack[pos] = true;
+  }
+
+  // right down
+  for (let i = this.x + 1, j = this.y + 1, steps = 1; i < 8 && j < 8 && steps <= 2; i++, j++, steps++) {
+    let pos = i.toString() + ":" + j.toString();
+
+    if (this.pieces[pos]) {
+      break;
+    }
+    this.moveTrack[pos] = true;
+  }
+
+  return this.moveTrack;
+}
+
 
   isKnight() {
     if (this.x + 2 < 8 && this.y + 1 < 8) {
