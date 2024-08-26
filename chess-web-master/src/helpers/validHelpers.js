@@ -65,60 +65,54 @@ class ValidMove {
     return false;
 }
 
-  isRook() {
-    if (
-      Math.abs(this.prevX - this.x) > 0 &&
-      Math.abs(this.prevY - this.y) > 0
-    ) {
-      return false;
+isRook() {
+  if (
+    Math.abs(this.prevX - this.x) > 2 || 
+    Math.abs(this.prevY - this.y) > 2 || 
+    (Math.abs(this.prevX - this.x) > 0 && Math.abs(this.prevY - this.y) > 0)
+  ) {
+    return false;
+  }
+
+  // Check for up direction
+  if (this.prevX - this.x > 0 && this.prevY === this.y) {
+    for (let i = this.prevX - 1; i >= this.x; i--) {
+      let pos = i.toString() + ":" + this.y.toString();
+      if (this.pieces[pos]) return false;
     }
-
-    let left = false,
-      right = false,
-      up = false,
-      down = false;
-
-    if (this.prevY - this.y > 0) left = true;
-
-    if (this.prevY - this.y < 0) right = true;
-
-    if (this.prevX - this.x > 0) up = true;
-
-    if (this.prevX - this.x < 0) down = true;
-
-    if (up) {
-      for (let i = this.prevX - 1; i > this.x; i--) {
-        let pos = i.toString() + ":" + this.y.toString();
-
-        if (this.pieces[pos]) return false;
-      }
-    }
-
-    if (down) {
-      for (let i = this.prevX + 1; i < this.x; i++) {
-        let pos = i.toString() + ":" + this.y.toString();
-
-        if (this.pieces[pos]) return false;
-      }
-    }
-
-    if (right) {
-      for (let i = this.prevY + 1; i < this.y; i++) {
-        let pos = this.x.toString() + ":" + i.toString();
-        if (this.pieces[pos]) return false;
-      }
-    }
-
-    if (left) {
-      for (let i = this.prevY - 1; i > this.y; i--) {
-        let pos = this.x.toString() + ":" + i.toString();
-
-        if (this.pieces[pos]) return false;
-      }
-    }
-
     return true;
   }
+
+  // Check for down direction
+  if (this.x - this.prevX > 0 && this.prevY === this.y) {
+    for (let i = this.prevX + 1; i <= this.x; i++) {
+      let pos = i.toString() + ":" + this.y.toString();
+      if (this.pieces[pos]) return false;
+    }
+    return true;
+  }
+
+  // Check for left direction
+  if (this.prevY - this.y > 0 && this.prevX === this.x) {
+    for (let i = this.prevY - 1; i >= this.y; i--) {
+      let pos = this.x.toString() + ":" + i.toString();
+      if (this.pieces[pos]) return false;
+    }
+    return true;
+  }
+
+  // Check for right direction
+  if (this.y - this.prevY > 0 && this.prevX === this.x) {
+    for (let i = this.prevY + 1; i <= this.y; i++) {
+      let pos = this.x.toString() + ":" + i.toString();
+      if (this.pieces[pos]) return false;
+    }
+    return true;
+  }
+
+  return false;
+}
+
 
   isBishop() {
     if (Math.abs(this.prevX - this.x) !== Math.abs(this.prevY - this.y)) {
