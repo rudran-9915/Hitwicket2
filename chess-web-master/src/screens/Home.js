@@ -76,11 +76,7 @@ export default function Home() {
           <h3 style={{ marginLeft: 5 }}> {user?.username}</h3>
         </div>
 
-        <img
-          src={""}
-          alt=""
-          style={{ height: 40, width: 40, margin: 5 }}
-        />
+        
 
         <Button onClick={logout} style={{ fontWeight: "bold" }}>
           {" "}

@@ -62,7 +62,7 @@ export default function Login(props) {
   return (
     <div style={rootDiv}>
       <div style={loginDiv}>
-        <h2> A23 Chess</h2>
+        <h2> Advanced Chess Game </h2>
 
         <input
           style={inputStyle}
